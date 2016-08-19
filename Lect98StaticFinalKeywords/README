@@ -1,0 +1,60 @@
+Static feautres: are associated with the class rather than with any particular instance of the class, 
+there will only be one copy of it the memory. All instances of the class share that one class variable
+
+The main() method is static because it has to be an entry point, and it has to be called from the class name (Main, 
+or whatever the name of your entry point class is. And that you can only do it using a static method.
+
+"Non-static method xxxxx() cannot be referenced from a static context" : this happens because a normal 
+class field require of the instanceof a class that dont actually exist until the instance is created. 
+So Java can't allowed static methods to access non-static fields or methods.
+
+The opposite is not true, we can access static variables and methods from non-staic methods, 
+constructor or whatsoever. 
+
+NOTE : there's nothing that prevent using non-static fields and methods from another 
+class because it's createad an instance of it already. The restriction is purely 
+applied to static methods accessing non-static member variables or methods in its own class.
+
+
+Final Keyword : strickly speaking final fields are not actual constants, 
+because they can be modified but only once and any modification must be done
+before the class constructor finishes. Meaning that we can assign to a final 
+field its value either when we first declare it or in the constructor. 
+But no in both. Doing it in the constructor would be when the variables 
+value would be the result of some kind of calculation.
+
+Constants are declared as static final, because if the value 
+is a constant and won't change then it doesn't makes sense to store a copy
+ of that in every single class instance. 
+
+TIP : The Math class is declared as final:
+
+public final class Math {...}
+
+but its constructor is marked as private:
+
+ /**
+     * Don't let anyone instantiate this class.
+     */
+private Math() {}
+
+And that's to prevent of it to be created, being the reason for it 
+that all the class methods are static and to make that clear and 
+actually enforce it the constructor is marked as private, 
+preventing any instances from being created. You can't also 
+inherit from the Math class as it's declared as final.
+
+TIP : in case is a method what you don't want to be overriden 
+in case a class is subclassed we can mark it as final.
+
+Static Initialization block:----------------------------
+
+Constructors are instance consructor, ergo they're not static. 
+The static equivalent of it are the static initialization blocks. 
+The difference is that that block of code is only executed once, 
+when the class is first loaded into memory. 
+
+NOTE: A static final variable must be initialized by the time when the 
+static initialization block terminates. 
+
+NOTE: we can have as many static initialization blocks as we want, and they're called in the order they were created in the class. And they're all called before the constructor is invoked, actually they get called before any non-static method for that purpose.
